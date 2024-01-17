@@ -1,5 +1,7 @@
 package com.example.cosmaptracker.ui.composable
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ButtonDefaults
@@ -8,6 +10,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -20,7 +24,11 @@ fun CalculateButton(onClick: () -> Unit) {
         onClick = { onClick() },
         colors = ButtonDefaults.elevatedButtonColors(
             containerColor = Color.LightGray,
-            contentColor = Color.Black
+            contentColor = Color.Black,
+        ),
+        border = BorderStroke(
+            width = 1.dp,
+            color = Color.Black,
         ),
         modifier = Modifier.padding(vertical = 16.dp)
     ) {
