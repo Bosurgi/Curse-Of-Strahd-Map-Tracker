@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.cosmaptracker.ui.composable.CalculateButton
 import com.example.cosmaptracker.ui.composable.distanceBox
 import com.example.cosmaptracker.ui.composable.dropDownMenu
 
@@ -25,8 +26,11 @@ fun home() {
                 )
             {
                 dropDownMenu()
+                CalculateButton {
 
-                distanceBox(distance = "null", time = 10)
+                }
+
+                distanceBox(distance = "", time = 0)
             }
 
 
