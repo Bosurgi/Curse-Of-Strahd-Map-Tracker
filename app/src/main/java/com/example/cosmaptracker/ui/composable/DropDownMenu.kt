@@ -138,7 +138,7 @@ fun dropDownMenu() {
                     items(locations) { location ->
                         DropdownMenuItem(
                             text = { Text(location.name) },
-                            onClick = { startLocation = location.name; isStartExpanded = false })
+                            onClick = { endLocation = location.name; isDestinationExpanded = false })
                     }
                 }
             }
