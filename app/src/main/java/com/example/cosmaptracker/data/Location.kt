@@ -10,11 +10,9 @@ import androidx.room.PrimaryKey
  */
 @Entity(tableName = "locations")
 data class Location(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
     val name: String
 ) {
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = 0
-    // The distance table for this location to other locations.
-    val distanceTable: Map<Location, Int> = emptyMap()
-
+    constructor(name: String) : this(0, name)
 }
