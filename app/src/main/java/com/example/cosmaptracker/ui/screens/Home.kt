@@ -7,13 +7,15 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.cosmaptracker.ui.composable.CalculateButton
 import com.example.cosmaptracker.ui.composable.distanceBox
 import com.example.cosmaptracker.ui.composable.dropDownMenu
 
 @Composable
-fun home() {
+fun Home(viewModel: HomeViewModel) {
+
+    val locations = viewModel.getAllLocations()
+
     Surface {
         Box(modifier = Modifier.fillMaxSize()) {
             homeHeader()
@@ -25,7 +27,7 @@ fun home() {
 
                 )
             {
-                dropDownMenu()
+                dropDownMenu(locations)
                 CalculateButton {
 
                 }
@@ -38,8 +40,8 @@ fun home() {
     }
 }
 
-@Composable
-@Preview
-fun homePreview() {
-    home()
-}
+//@Composable
+//@Preview
+//fun homePreview() {
+//    Home()
+//}

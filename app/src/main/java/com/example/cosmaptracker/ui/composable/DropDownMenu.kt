@@ -1,5 +1,6 @@
 package com.example.cosmaptracker.ui.composable
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,25 +25,31 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalTextInputService
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.cosmaptracker.data.Location
+import com.example.cosmaptracker.data.LocationDao
+import com.example.cosmaptracker.data.LocationDatabase
+import com.example.cosmaptracker.data.LocationRepository
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
-fun dropDownMenu() {
+fun dropDownMenu(locations: List<Location>) {
     // The List to display - Fake data for now
-    val barovia = Location("Barovia")
-    val vallaki = Location("Vallaki")
-    val krezk = Location("Krezk")
-    val locations = listOf<Location>(barovia, vallaki, krezk)
+//    val barovia = Location("Barovia")
+//    val vallaki = Location("Vallaki")
+//    val krezk = Location("Krezk")
+//    val locations = listOf<Location>(barovia, vallaki, krezk)
 
     var isStartExpanded by remember { mutableStateOf(false) }
     var isDestinationExpanded by remember { mutableStateOf(false) }
 
     var startLocation by remember { mutableStateOf("") }
     var endLocation by remember { mutableStateOf("") }
+
+    var currentLocations = locations
 
 
     Column(
@@ -89,7 +96,7 @@ fun dropDownMenu() {
                         .width(200.dp)
                         .height(150.dp)
                 ) {
-                    items(locations) { location ->
+                    items(currentLocations) { location ->
                         DropdownMenuItem(
                             text = { Text(location.name) },
                             onClick = { startLocation = location.name; isStartExpanded = false })
@@ -127,15 +134,12 @@ fun dropDownMenu() {
                 modifier = Modifier.background(color = MaterialTheme.colorScheme.background)
             )
             {
-                /* TODO: Add the list of locations here
-                * For loop for each location and create the items or LazyColumn
-                */
                 LazyColumn(
                     modifier = Modifier
                         .width(200.dp)
                         .height(150.dp)
                 ) {
-                    items(locations) { location ->
+                    items(currentLocations) { location ->
                         DropdownMenuItem(
                             text = { Text(location.name) },
                             onClick = { endLocation = location.name; isDestinationExpanded = false })
@@ -152,5 +156,8 @@ fun dropDownMenu() {
 @Composable
 @Preview
 fun dropDownMenuPreview() {
-    dropDownMenu()
+    val barovia = Location("Barovia")
+    val vallaki = Location("Vallaki")
+    var locations = listOf<Location>(barovia, vallaki)
+    dropDownMenu(locations)
 }
