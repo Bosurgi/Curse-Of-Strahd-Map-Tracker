@@ -28,9 +28,14 @@ fun Home(viewModel: HomeViewModel) {
                 )
             {
                 DropDownMenu(viewModel)
-                CalculateButton {
+                CalculateButton(
+                    startLocation = viewModel.getStartLocation(),
+                    endLocation = viewModel.getEndLocation(),
+                    onClick = { startLocation, endLocation ->
+                        // TODO: Implement the onClick function from ViewModel to get the Data
+                    }
+                )
 
-                }
 
                 distanceBox(distance = "", time = 0)
             }

@@ -28,12 +28,12 @@ class HomeViewModel(private val repository: LocationRepository) : ViewModel() {
         }
     }
 
-    fun getStartLocation(startLocation: Location) {
-        this.startLocation = startLocation
+    fun getStartLocation(): Location {
+        return startLocation
     }
 
-    fun getEndLocation(endLocation: Location) {
-        this.endLocation = endLocation
+    fun getEndLocation(): Location {
+        return endLocation
     }
 
     fun getDistance(distance: Int) {
