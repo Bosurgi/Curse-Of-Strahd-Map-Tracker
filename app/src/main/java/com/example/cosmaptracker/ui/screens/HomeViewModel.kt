@@ -2,6 +2,7 @@ package com.example.cosmaptracker.ui.screens
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
@@ -12,7 +13,7 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(private val repository: LocationRepository) : ViewModel() {
 
-    private var locations: List<Location> by mutableStateOf(emptyList())
+    private var locations = mutableStateListOf<Location>()
     private var startLocation: Location by mutableStateOf(Location(""))
     private var endLocation: Location by mutableStateOf(Location(""))
     private var distance: Int by mutableIntStateOf(0)
@@ -33,13 +34,14 @@ class HomeViewModel(private val repository: LocationRepository) : ViewModel() {
         viewModelScope.launch {
             repository.getAllLocations().collect {
                 it.forEach { location ->
-                    locations = locations + location
+                    locations.add(location)
                 }
 
             }
         }
         return locations
     }
+
 
 }
 
