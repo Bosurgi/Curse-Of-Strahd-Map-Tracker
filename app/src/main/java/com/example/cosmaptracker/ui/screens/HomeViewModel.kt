@@ -18,6 +18,16 @@ class HomeViewModel(private val repository: LocationRepository) : ViewModel() {
     private var endLocation: Location by mutableStateOf(Location(""))
     private var distance: Int by mutableIntStateOf(0)
 
+    init {
+        viewModelScope.launch {
+            repository.getAllLocations().collect{
+                it.forEach{ location ->
+                    locations.add(location)
+                }
+            }
+        }
+    }
+
     fun getStartLocation(startLocation: Location) {
         this.startLocation = startLocation
     }
@@ -31,17 +41,8 @@ class HomeViewModel(private val repository: LocationRepository) : ViewModel() {
     }
 
     fun getAllLocations(): List<Location> {
-        viewModelScope.launch {
-            repository.getAllLocations().collect {
-                it.forEach { location ->
-                    locations.add(location)
-                }
-
-            }
-        }
         return locations
     }
-
 
 }
 

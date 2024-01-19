@@ -1,6 +1,5 @@
 package com.example.cosmaptracker.ui.composable
 
-import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,26 +24,22 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalTextInputService
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.cosmaptracker.data.Location
-import com.example.cosmaptracker.data.LocationDao
-import com.example.cosmaptracker.data.LocationDatabase
-import com.example.cosmaptracker.data.LocationRepository
+import com.example.cosmaptracker.ui.screens.HomeViewModel
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
-fun dropDownMenu(locations: List<Location>) {
+fun DropDownMenu(viewModel: HomeViewModel) {
     // The List to display - Fake data for now
 
     var isStartExpanded by remember { mutableStateOf(false) }
     var isDestinationExpanded by remember { mutableStateOf(false) }
 
+    val locations = viewModel.getAllLocations()
     var startLocation by remember { mutableStateOf("") }
     var endLocation by remember { mutableStateOf("") }
-
 
     Column(
         modifier = Modifier
@@ -82,21 +77,12 @@ fun dropDownMenu(locations: List<Location>) {
                 modifier = Modifier.background(color = MaterialTheme.colorScheme.background)
             )
             {
-                /* TODO: Add the list of locations here
-                * For loop for each location and create the items or LazyColumn
-                */
-                LazyColumn(
-                    modifier = Modifier
-                        .width(200.dp)
-                        .height(150.dp)
-                ) {
-                    items(locations) { location ->
-                        DropdownMenuItem(
-                            text = { Text(location.name) },
-                            onClick = { startLocation = location.name; isStartExpanded = false })
-                    }
+                LocationDropDownList(locations) {
+                    selectedLocation ->
+                    startLocation = selectedLocation.name;
+                    viewModel.getEndLocation(selectedLocation)
                 }
-            }
+            } // End of Column
         } // End of ExposedDropdownMenuBox
 
         // DropDown Menu displaying the destination location
@@ -128,16 +114,10 @@ fun dropDownMenu(locations: List<Location>) {
                 modifier = Modifier.background(color = MaterialTheme.colorScheme.background)
             )
             {
-                LazyColumn(
-                    modifier = Modifier
-                        .width(200.dp)
-                        .height(150.dp)
-                ) {
-                    items(locations) { location ->
-                        DropdownMenuItem(
-                            text = { Text(location.name) },
-                            onClick = { endLocation = location.name; isDestinationExpanded = false })
-                    }
+                LocationDropDownList(locations) {
+                        selectedLocation ->
+                    endLocation = selectedLocation.name;
+                    viewModel.getEndLocation(selectedLocation)
                 }
             }
         } // End of ExposedDropdownMenuBox
@@ -146,12 +126,29 @@ fun dropDownMenu(locations: List<Location>) {
 
 } // End of dropDownMenu
 
-
 @Composable
-@Preview
-fun dropDownMenuPreview() {
-    val barovia = Location("Barovia")
-    val vallaki = Location("Vallaki")
-    var locations = listOf<Location>(barovia, vallaki)
-    dropDownMenu(locations)
+private fun LocationDropDownList(
+    locations: List<Location>,
+    onItemClick: (Location) -> Unit) {
+    LazyColumn(
+        modifier = Modifier
+            .width(200.dp)
+            .height(150.dp)
+    ) {
+        items(locations) {
+            DropdownMenuItem(
+                text = { Text(it.name) },
+                onClick = { onItemClick(it) })
+        }
+    }
 }
+
+
+//@Composable
+//@Preview
+//fun dropDownMenuPreview() {
+//    val barovia = Location("Barovia")
+//    val vallaki = Location("Vallaki")
+//    var locations = listOf<Location>(barovia, vallaki)
+//    DropDownMenu(locations)
+//}
