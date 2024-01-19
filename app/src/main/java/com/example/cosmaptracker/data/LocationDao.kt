@@ -44,4 +44,6 @@ interface LocationDao {
       */
      @Query("SELECT * FROM locations WHERE name = :name")
         fun getLocation(name: String): Flow<Location>
+
+
 }
