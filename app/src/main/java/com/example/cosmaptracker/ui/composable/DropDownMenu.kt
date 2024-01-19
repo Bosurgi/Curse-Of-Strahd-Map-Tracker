@@ -38,18 +38,12 @@ import com.example.cosmaptracker.data.LocationRepository
 @Composable
 fun dropDownMenu(locations: List<Location>) {
     // The List to display - Fake data for now
-//    val barovia = Location("Barovia")
-//    val vallaki = Location("Vallaki")
-//    val krezk = Location("Krezk")
-//    val locations = listOf<Location>(barovia, vallaki, krezk)
 
     var isStartExpanded by remember { mutableStateOf(false) }
     var isDestinationExpanded by remember { mutableStateOf(false) }
 
     var startLocation by remember { mutableStateOf("") }
     var endLocation by remember { mutableStateOf("") }
-
-    var currentLocations = locations
 
 
     Column(
@@ -96,7 +90,7 @@ fun dropDownMenu(locations: List<Location>) {
                         .width(200.dp)
                         .height(150.dp)
                 ) {
-                    items(currentLocations) { location ->
+                    items(locations) { location ->
                         DropdownMenuItem(
                             text = { Text(location.name) },
                             onClick = { startLocation = location.name; isStartExpanded = false })
@@ -139,7 +133,7 @@ fun dropDownMenu(locations: List<Location>) {
                         .width(200.dp)
                         .height(150.dp)
                 ) {
-                    items(currentLocations) { location ->
+                    items(locations) { location ->
                         DropdownMenuItem(
                             text = { Text(location.name) },
                             onClick = { endLocation = location.name; isDestinationExpanded = false })

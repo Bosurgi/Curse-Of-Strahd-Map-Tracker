@@ -32,6 +32,8 @@ abstract class LocationDatabase : RoomDatabase() {
                 Room.databaseBuilder(context, LocationDatabase::class.java, "location_database")
                     // If the schema changes we can add migration logic here.
                     .fallbackToDestructiveMigration()
+                    // Create the database from the asset file.
+                    .createFromAsset("database/location_database.db")
                     // Building the database
                     .build()
                     // Keep the reference to the created DB.

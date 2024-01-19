@@ -35,15 +35,18 @@ interface LocationDao {
      * Gets all locations from the database.
      */
     @Query("SELECT * FROM locations ORDER by name ASC")
-     fun getAllLocations(): Flow<List<Location>>
+    fun getAllLocations(): Flow<List<Location>>
 
-     /***
-      * Gets a location from the database.
-      * @param name The name of the location to get.
-      * @return The location with the given name.
-      */
-     @Query("SELECT * FROM locations WHERE name = :name")
-        fun getLocation(name: String): Flow<Location>
+    /***
+     * Gets a location from the database.
+     * @param name The name of the location to get.
+     * @return The location with the given name.
+     */
+    @Query("SELECT * FROM locations WHERE name = :name")
+    fun getLocation(name: String): Flow<Location>
+
+//    @Query("SELECT * FROM locations WHERE locationId = :locationId")
+//    fun getLocationDistances(locationId: Int): Flow<List<LocationWithDistances>>
 
 
 }
