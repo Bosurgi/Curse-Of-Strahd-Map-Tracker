@@ -7,13 +7,15 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.cosmaptracker.ui.composable.CalculateButton
+import com.example.cosmaptracker.ui.composable.DropDownMenu
 import com.example.cosmaptracker.ui.composable.distanceBox
-import com.example.cosmaptracker.ui.composable.dropDownMenu
 
 @Composable
-fun home() {
+fun Home(viewModel: HomeViewModel) {
+
+
     Surface {
         Box(modifier = Modifier.fillMaxSize()) {
             homeHeader()
@@ -25,10 +27,15 @@ fun home() {
 
                 )
             {
-                dropDownMenu()
-                CalculateButton {
+                DropDownMenu(viewModel)
+                CalculateButton(
+                    startLocation = viewModel.getStartLocation(),
+                    endLocation = viewModel.getEndLocation(),
+                    onClick = { startLocation, endLocation ->
+                        // TODO: Implement the onClick function from ViewModel to get the Data
+                    }
+                )
 
-                }
 
                 distanceBox(distance = "", time = 0)
             }
@@ -38,8 +45,8 @@ fun home() {
     }
 }
 
-@Composable
-@Preview
-fun homePreview() {
-    home()
-}
+//@Composable
+//@Preview
+//fun homePreview() {
+//    Home()
+//}
