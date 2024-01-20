@@ -12,7 +12,7 @@ abstract class LocationDatabase : RoomDatabase() {
      * Gets the location DAO.
      */
     abstract fun locationDao(): LocationDao
-    abstract fun destinationDao(): DistanceDao
+    abstract fun distanceDao(): DistanceDao
 
     companion object {
         /***

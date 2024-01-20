@@ -1,8 +1,11 @@
 package com.example.cosmaptracker.data
 
-class LocationRepository(private val locationDao: LocationDao) {
+class LocationRepository(
+    private val locationDao: LocationDao,
+    private val distanceDao: DistanceDao
+) {
 
-/***
+    /***
      * Inserts a location into the database. If the location already exists, ignore the action.
      * @param location The location to insert.
      */
@@ -37,5 +40,13 @@ class LocationRepository(private val locationDao: LocationDao) {
      * @return The location with the given name.
      */
     fun getLocation(name: String) = locationDao.getLocation(name)
+
+    /***
+     * Gets the distance between starting point and destination
+     * @param startLocationId The id of the starting location.
+     * @param destinationLocationId The id of the destination location.
+     */
+    suspend fun getDistance(startLocationId: Int, destinationLocationId: Int) =
+        distanceDao.getDistance(startLocationId, destinationLocationId)
 
 }

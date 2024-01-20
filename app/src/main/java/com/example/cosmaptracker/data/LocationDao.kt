@@ -45,6 +45,12 @@ interface LocationDao {
     @Query("SELECT * FROM locations WHERE name = :name")
     fun getLocation(name: String): Flow<Location>
 
+    /***
+     * Get a location by its id.
+     */
+    @Query("SELECT * FROM locations WHERE locationId = :locationId")
+    fun getLocationById (locationId: Int): Flow<Location>
+
 //    @Query("SELECT * FROM locations WHERE locationId = :locationId")
 //    fun getLocationDistances(locationId: Int): Flow<List<LocationWithDistances>>
 

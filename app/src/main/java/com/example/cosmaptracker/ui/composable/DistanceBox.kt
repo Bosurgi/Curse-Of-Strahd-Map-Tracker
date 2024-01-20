@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun distanceBox(distance: String, time: Int) {
+fun DistanceBox(distance: String, time: Int) {
 
     Column(
         modifier = Modifier
@@ -47,7 +47,7 @@ fun distanceBox(distance: String, time: Int) {
             // Distance - Value
             Text(
                 textAlign = TextAlign.Justify,
-                text = distance,
+                text = distance + " miles",
                 style = MaterialTheme.typography.bodyMedium,
             )
         }
@@ -68,7 +68,7 @@ fun distanceBox(distance: String, time: Int) {
             // Time - Value
             Text(
                 textAlign = TextAlign.Justify,
-                text = time.toString(),
+                text = time.toString() + " hours",
                 style = MaterialTheme.typography.bodyMedium,
             )
         }
@@ -77,6 +77,6 @@ fun distanceBox(distance: String, time: Int) {
 
 @Composable
 @Preview
-fun distanceBoxPreview() {
-    distanceBox("10km", 10)
+fun DistanceBoxPreview() {
+    DistanceBox("10km", 10)
 }

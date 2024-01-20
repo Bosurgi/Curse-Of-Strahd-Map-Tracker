@@ -27,7 +27,13 @@ interface DistanceDao {
     @Delete
     suspend fun deleteDistance(distance: Distance)
 
-    // Example
-    // SELECT distance from distances where locationId in (select locationId from locations where name = "Barovia")
+    /***
+     * Gets the distance between two points
+     * @param locationId The location to get the distance from.
+     * @param destinationId The location to get the distance to.
+     */
+    @Query("SELECT distance FROM distances WHERE startLocationId = :locationId AND destinationLocationId = :destinationId")
+    suspend fun getDistance(locationId: Int, destinationId: Int): Int
+
 }
 

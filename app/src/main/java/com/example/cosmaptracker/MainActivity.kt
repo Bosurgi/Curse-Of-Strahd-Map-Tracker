@@ -14,7 +14,8 @@ class MainActivity : ComponentActivity() {
 
         val viewModel = HomeViewModel(
             repository = LocationRepository(
-                LocationDatabase.getDatabase(this).locationDao()
+                LocationDatabase.getDatabase(this).locationDao(),
+                LocationDatabase.getDatabase(this).distanceDao(),
             )
         )
         setContent {

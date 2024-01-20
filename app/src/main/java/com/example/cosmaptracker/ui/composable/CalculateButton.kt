@@ -22,9 +22,9 @@ import com.example.cosmaptracker.data.Location
  * @param endLocation: The ending location
  */
 @Composable
-fun CalculateButton(startLocation: Location,
-                    endLocation: Location,
-                    onClick: (Location, Location) -> Unit) {
+fun CalculateButton(startLocation: Location?,
+                    endLocation: Location?,
+                    onClick: (startLocation: Location?, endLocation: Location?) -> Unit) {
 
     ElevatedButton(
         // On Click, using start and end locations to calculate distance
