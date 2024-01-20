@@ -77,11 +77,11 @@ fun DropDownMenu(viewModel: HomeViewModel) {
                 modifier = Modifier.background(color = MaterialTheme.colorScheme.background)
             )
             {
-                LocationDropDownList(locations) {
-                    selectedLocation ->
+                LocationDropDownList(locations, onItemClick = { selectedLocation ->
                     startLocation = selectedLocation.name;
-                    viewModel.getEndLocation(selectedLocation)
-                }
+                    // Sets the start Location in the ViewModel
+                    viewModel.startLocation = selectedLocation
+                }, onExpandedChange = { isStartExpanded = it })
             } // End of Column
         } // End of ExposedDropdownMenuBox
 
@@ -89,7 +89,6 @@ fun DropDownMenu(viewModel: HomeViewModel) {
         ExposedDropdownMenuBox(expanded = isDestinationExpanded,
             onExpandedChange = { expanded ->
                 isDestinationExpanded = expanded
-
             }
         ) {
             // Wrapping into CompositionLocalProvider to prevent Keyboard to open
@@ -114,11 +113,11 @@ fun DropDownMenu(viewModel: HomeViewModel) {
                 modifier = Modifier.background(color = MaterialTheme.colorScheme.background)
             )
             {
-                LocationDropDownList(locations) {
-                        selectedLocation ->
+                LocationDropDownList(locations, onItemClick = { selectedLocation ->
                     endLocation = selectedLocation.name;
-                    viewModel.getEndLocation(selectedLocation)
-                }
+                    // Sets the start Location in the ViewModel
+                    viewModel.endLocation = selectedLocation
+                }, onExpandedChange = { isDestinationExpanded = it })
             }
         } // End of ExposedDropdownMenuBox
 
@@ -129,7 +128,9 @@ fun DropDownMenu(viewModel: HomeViewModel) {
 @Composable
 private fun LocationDropDownList(
     locations: List<Location>,
-    onItemClick: (Location) -> Unit) {
+    onItemClick: (Location) -> Unit,
+    onExpandedChange: (Boolean) -> Unit
+) {
     LazyColumn(
         modifier = Modifier
             .width(200.dp)
@@ -138,7 +139,11 @@ private fun LocationDropDownList(
         items(locations) {
             DropdownMenuItem(
                 text = { Text(it.name) },
-                onClick = { onItemClick(it) })
+                onClick = {
+                    onItemClick(it)
+                    onExpandedChange(false)
+                }
+            )
         }
     }
 }
