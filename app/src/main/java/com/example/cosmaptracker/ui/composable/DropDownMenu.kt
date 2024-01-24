@@ -29,15 +29,17 @@ import androidx.compose.ui.unit.dp
 import com.example.cosmaptracker.data.Location
 import com.example.cosmaptracker.ui.screens.HomeViewModel
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DropDownMenu(viewModel: HomeViewModel) {
-    // The List to display - Fake data for now
 
+    // Flag to check if the DropDown Menus are expanded
     var isStartExpanded by remember { mutableStateOf(false) }
     var isDestinationExpanded by remember { mutableStateOf(false) }
 
+    // Getting the list of locations from the View Model
     val locations = viewModel.getAllLocations()
+    // The Start Location and End Location as a State to be remembered by the Composable
     var startLocation by remember { mutableStateOf("") }
     var endLocation by remember { mutableStateOf("") }
 
@@ -58,7 +60,7 @@ fun DropDownMenu(viewModel: HomeViewModel) {
             // Wrapping into CompositionLocalProvider to prevent Keyboard to open
             CompositionLocalProvider(LocalTextInputService provides null) {
                 OutlinedTextField(
-                    value = startLocation,
+                    value = viewModel.startLocation.name,
                     readOnly = true,
                     onValueChange = { startLocation = it },
                     trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = isStartExpanded) },
@@ -77,11 +79,15 @@ fun DropDownMenu(viewModel: HomeViewModel) {
                 modifier = Modifier.background(color = MaterialTheme.colorScheme.background)
             )
             {
-                LocationDropDownList(locations, onItemClick = { selectedLocation ->
-                    startLocation = selectedLocation.name;
-                    // Sets the start Location in the ViewModel
-                    viewModel.startLocation = selectedLocation
-                }, onExpandedChange = { isStartExpanded = it })
+                LocationDropDownList(
+                    locations,
+                    onItemClick = { selectedLocation ->
+                        startLocation = selectedLocation.name;
+                        // Sets the start Location in the ViewModel
+                        viewModel.startLocation = selectedLocation
+                    },
+                    onExpandedChange = { isStartExpanded = it },
+                )
             } // End of Column
         } // End of ExposedDropdownMenuBox
 
@@ -94,7 +100,7 @@ fun DropDownMenu(viewModel: HomeViewModel) {
             // Wrapping into CompositionLocalProvider to prevent Keyboard to open
             CompositionLocalProvider(LocalTextInputService provides null) {
                 OutlinedTextField(
-                    value = endLocation,
+                    value = viewModel.endLocation.name,
                     readOnly = true,
                     onValueChange = { endLocation = it },
                     trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = isDestinationExpanded) },
