@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.dp
 import com.example.cosmaptracker.data.Location
 import com.example.cosmaptracker.ui.screens.HomeViewModel
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DropDownMenu(viewModel: HomeViewModel) {
 
