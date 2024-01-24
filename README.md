@@ -17,5 +17,5 @@ The Application is a Work In Progress small project to learn the basics of JetPa
 
 # To Implement
 1. Slider to chose between three distances.
-2. Data permanence with Screen Rotation
+2. User Search on DropDown Menu
 3. Better UI
