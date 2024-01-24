@@ -43,7 +43,7 @@ fun DropDownMenu(viewModel: HomeViewModel) {
 
     Column(
         modifier = Modifier
-            .padding(16.dp)
+            .padding(25.dp)
             .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
 
@@ -53,7 +53,7 @@ fun DropDownMenu(viewModel: HomeViewModel) {
             expanded = isStartExpanded,
             onExpandedChange = { expanded -> isStartExpanded = expanded },
             // Adding some distance between the two DropDown Menus
-            modifier = Modifier.padding(top = 16.dp, bottom = 36.dp)
+            modifier = Modifier.padding(top = 16.dp, bottom = 40.dp)
         ) {
             // Wrapping into CompositionLocalProvider to prevent Keyboard to open
             CompositionLocalProvider(LocalTextInputService provides null) {
