@@ -8,7 +8,7 @@
 This is an simple Android app, using JetPack Compose and Material3 theme.
 The application is able to calculate the distance between locations in Barovia, a DnD Horror Campaign part of Curse of Strahd.
 
-The Application is a Work In Progress small project to learn the basics of JetPack Compose and getting use to it.
+The Application is a Work In Progress small project to learn the basics of JetPack Compose and getting used to it.
 
 # Features
 1. Calculates the distance between Barovia's Locations
