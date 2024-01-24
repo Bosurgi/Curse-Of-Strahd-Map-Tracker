@@ -33,6 +33,7 @@ import com.example.cosmaptracker.ui.screens.HomeViewModel
 @Composable
 fun DropDownMenu(viewModel: HomeViewModel) {
     // The List to display - Fake data for now
+    // TODO: Remember the selection of the user on screen rotation
 
     var isStartExpanded by remember { mutableStateOf(false) }
     var isDestinationExpanded by remember { mutableStateOf(false) }
